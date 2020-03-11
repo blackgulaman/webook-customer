@@ -25,7 +25,7 @@ module.exports = async ({ app }) => {
   // the __dirname is the current directory from where the script is running
   app.use(express.static(__dirname));
 
-  app.use('/client', require('../api')(app));
+  app.use('/customer', require('../api')(app));
   
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(configs.express.staticFiles));
