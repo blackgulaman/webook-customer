@@ -3,10 +3,10 @@ const path = require('path');
 
 module.exports = {
   /**
-   * This prefix will automatically append '/client'
-   * for all the routes. ex: https://localhost:9000/client
+   * This prefix will automatically append '/customer'
+   * for all the routes. ex: https://localhost:5000/customer
    */
-  apiPrefix: '/client',
+  apiPrefix: '/customer',
 
   staticFiles: path.join(__dirname, '../../frontend', 'build'),
 
