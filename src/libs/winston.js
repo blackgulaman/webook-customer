@@ -2,7 +2,7 @@ const { createLogger, format, transports, add } = require('winston');
 
 module.exports = filename => {
   const myFormat = format.printf(({ timestamp, level, message, ...extra }) => {
-    return `${timestamp} [client-service] [${level}] => ${JSON.stringify({
+    return `${timestamp} [customer-service] [${level}] => ${JSON.stringify({
       message,
       extra,
       filename
