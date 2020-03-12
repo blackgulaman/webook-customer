@@ -11,9 +11,10 @@ require('dotenv/config');
   const server = configs.app.isHttp
     ? require('http').Server(app)
     : require('https').createServer(configs.express.certificates, app);
-  console.log('test')
+
   // Load all the modules and configurations
   await require('./loaders')({ app, server });
+  
   // It will run now the server with dedicated port
   server.listen(configs.app.port, error => {
     if (error) {

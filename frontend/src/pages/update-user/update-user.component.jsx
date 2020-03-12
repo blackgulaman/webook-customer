@@ -34,7 +34,7 @@ const useStyles = theme => ({
   }
 });
 
-class SignUpComponent extends React.Component {
+class UpdateUserPage extends React.Component {
   constructor() {
     super();
 
@@ -46,6 +46,25 @@ class SignUpComponent extends React.Component {
       date_registered: '',
       date_updated: ''
     };
+  }
+
+  componentDidMount() {
+    Axios.get(
+      '/customer/users/' + this.props.match.params.id
+    )
+      .then(res => {
+        this.setState({
+          name: res.data.name,
+          email: res.data.email,
+          username: res.data.username,
+          password: res.data.password,
+          date_registered: res.data.published_date,
+          date_updated: res.data.date_updated
+        });
+      })
+      .catch(err => {
+        console.log('Error on update-user.component');
+      });
   }
 
   handleChange = event => {
@@ -64,20 +83,15 @@ class SignUpComponent extends React.Component {
       date_updated: this.state.date_updated
     };
 
-    Axios.post('/customer/users/', data)
+    Axios.put(
+      '/customer/users/' + this.props.match.params.id,
+      data
+    )
       .then(res => {
-        this.setState({
-          name: '',
-          email: '',
-          username: '',
-          password: '',
-          date_registered: '',
-          date_updated: ''
-        });
-        this.props.history.push('/');
+        this.props.history.push('/user-details/' + this.props.match.params.id);
       })
       .catch(err => {
-        console.log('Error on sign-up.component');
+        console.log('Error on update-user.component');
       });
   };
 
@@ -97,7 +111,7 @@ class SignUpComponent extends React.Component {
             />
           </NavLink>
           <Typography component="h1" variant="h5">
-            Add User
+            Update User
           </Typography>
           <form
             className={classes.form}
@@ -167,7 +181,7 @@ class SignUpComponent extends React.Component {
               color="primary"
               className={classes.submit}
             >
-              Add
+              Update
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
@@ -183,4 +197,4 @@ class SignUpComponent extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(SignUpComponent);
+export default withStyles(useStyles)(UpdateUserPage);
