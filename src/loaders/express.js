@@ -26,6 +26,10 @@ module.exports = async ({ app }) => {
   app.use(express.static(__dirname));
 
   app.use('/customer', require('../api')(app));
+
+  // Routes
+  const users = require('../api/user');
+  app.use('/customer/users', users);
   
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(configs.express.staticFiles));
